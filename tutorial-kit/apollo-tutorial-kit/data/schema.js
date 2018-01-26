@@ -11,14 +11,14 @@ type Query {
 }
 
 type Author {
-  id: Int
+  id: Int!
   firstName: String
   lastName: String
   posts: [Post]
 }
 
 type Post {
-  id: Int
+  id: Int!
   title: String
   text: String
   views: Int
