@@ -1,6 +1,14 @@
 # 
 Tutorial attended: https://dev-blog.apollodata.com/tutorial-building-a-graphql-server-cddaa023c035 
 
+## Mongo
+$ sudo service mongod start ==> start server
+
+$ (sudo) mongo ==> start mongo CLI
+$ > use views
+$ > show collections
+$ > db.[collectionName].find()
+
 ---------------------------------------------------------
 
 # apollo-tutorial-kit
