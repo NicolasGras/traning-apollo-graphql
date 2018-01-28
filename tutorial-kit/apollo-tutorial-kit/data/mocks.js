@@ -16,7 +16,7 @@ const mocks = {
 
   Author: () => ({
     firstName: () => casual.first_name,
-    lastName: () => casual.lastName
+    lastName: () => casual.lastName + " - " + args.createAt
   }),
 
   Post: () => ({

@@ -12,8 +12,9 @@ type Query {
 
 type Author {
   id: Int!
-  firstName: String
-  lastName: String
+  firstName: String!
+  lastName: String!
+  createdAt: String
   posts: [Post]
 }
 

@@ -1,3 +1,8 @@
+# 
+Tutorial attended: https://dev-blog.apollodata.com/tutorial-building-a-graphql-server-cddaa023c035 
+
+---------------------------------------------------------
+
 # apollo-tutorial-kit
 
 Starting point for the Apollo GraphQL Server tutorial.
