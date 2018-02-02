@@ -1,3 +1,11 @@
+#
+
+Tutorial attended: https://dev-blog.apollodata.com/full-stack-react-graphql-tutorial-582ac8d24e3b
+
+Github Repo: https://github.com/apollographql/graphql-tutorial/
+
+---------------------------------------------------------------------------------
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
