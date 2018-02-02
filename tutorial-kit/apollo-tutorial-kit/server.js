@@ -8,14 +8,25 @@ import { Engine } from 'apollo-engine'; // ...
 
 const GRAPHQL_PORT = 3000;
 
-const ENGINE_API_KEY = 'service:NicolasGras-7982:B_GqQ3x7lMC3PlyhaUXEgg'; // TODO - Add Apollo Engine to server
+const ENGINE_API_KEY = 'service:NicolasGras-7982:B_GqQ3x7lMC3PlyhaUXEgg'; // Add Apollo Engine to server
 
 const graphQLServer = express();
 
 // Add Apollo Engine to server (Start)
 const engine = new Engine({
   engineConfig: {
-    apiKey: ENGINE_API_KEY
+    apiKey: ENGINE_API_KEY,
+    stores: [   // Use of cache (Start)
+      {
+        name: 'inMemEmbeddedCache',
+        inMemory: {
+          cacheSize: 20971520 // 20 MB
+        }
+      }
+    ],
+    queryCache: {
+      publicFullQueryStore: 'inMemEmbeddedCache'
+    }   // Use of cache (End)
   },
   graphqlPort: GRAPHQL_PORT
 });
@@ -31,7 +42,8 @@ graphQLServer.use('/graphql',
                     bodyParser.json(), 
                     graphqlExpress(
                       { schema,
-                        tracing: true   // Add Apollo Engine to server (This option turns on tracing)
+                        tracing: true,      // Add Apollo Engine to server (This option turns on tracing)
+                        cacheControl: true  // Activate cache
                       }
                     )
                   );
