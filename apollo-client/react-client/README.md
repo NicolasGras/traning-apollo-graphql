@@ -13,6 +13,9 @@ npm install apollo-client-preset react-apollo graphql-tag graphql --save
 # installing each piece independently
 npm install apollo-client apollo-cache-inmemory apollo-link-http react-apollo graphql-tag graphql --save
 
+
+!!!!! Use of Apollo-client 2.0 is different than 1.0: https://github.com/apollographql/apollo-link/blob/master/packages/apollo-link-schema/README.md
+
 ---------------------------------------------------------------------------------
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
