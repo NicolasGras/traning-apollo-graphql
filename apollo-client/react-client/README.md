@@ -4,6 +4,15 @@ Tutorial attended: https://dev-blog.apollodata.com/full-stack-react-graphql-tuto
 
 Github Repo: https://github.com/apollographql/graphql-tutorial/
 
+
+npm packages to be installed
+
+# installing the preset package and react integration
+npm install apollo-client-preset react-apollo graphql-tag graphql --save
+
+# installing each piece independently
+npm install apollo-client apollo-cache-inmemory apollo-link-http react-apollo graphql-tag graphql --save
+
 ---------------------------------------------------------------------------------
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
