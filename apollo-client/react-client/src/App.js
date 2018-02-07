@@ -13,6 +13,9 @@ import gql from 'graphql-tag';
 
 import { typeDefs } from './schema';
 
+import AddChannel from './components/AddChannel';
+//import AddChannelWithMutation from './components/AddChannel';
+
 const mocks = {
   Query: () => ({
   
@@ -57,9 +60,15 @@ const ChannelsList = ({ data: {loading, error, channels }}) => {
     return <p>{error.message}</p>;
   }
 
-  return <ul>
-    { channels.map( ch => <li key={ch.id}>{ch.name}</li> ) }
-  </ul>;
+  return (
+    <div className="channelsList">
+      <AddChannel />
+      { channels.map( ch => 
+        (<div key={ch.id} className="channel">{ch.name}</div>)
+      )}
+    </div>
+  );
+  
 };
 
 const channelsListQuery = gql`
