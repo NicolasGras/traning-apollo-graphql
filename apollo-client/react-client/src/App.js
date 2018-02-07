@@ -3,7 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 
 import ApolloClient from 'apollo-client';
-import { SchemaLink } from "apollo-link-schema";
+import { HttpLink } from "apollo-link-http";
+//import { SchemaLink } from "apollo-link-schema";
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
 
@@ -45,7 +46,7 @@ const apolloCache = new InMemoryCache(window.__APOLLO_STATE__);
 
 const graphqlClient = new ApolloClient({
   cache: apolloCache,
-  link: new SchemaLink({ schema })
+  link: new HttpLink({uri: 'http://localhost:4000/graphql'})
 });
 
 const ChannelsList = ({ data: {loading, error, channels }}) => {
