@@ -2,13 +2,16 @@ import React from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
+import { channelsListQuery } from './ChannelList';
+
 const AddChannel = (props) => {
     const handleKeyUp = (evt) => {
         if (evt.keyCode === 13) {
-          console.log(evt.target.value);
           evt.persist();
+
           props.mutate({ 
-            variables: { name: evt.target.value }
+            variables: { name: evt.target.value },
+            refetchQueries: [ { query: channelsListQuery }]
           })
           .then( res => {
             evt.target.value = '';  

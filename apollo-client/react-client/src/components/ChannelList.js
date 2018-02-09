@@ -23,7 +23,9 @@ const ChannelsList = ({ data: {loading, error, channels }}) => {
     
   };
   
-  const channelsListQuery = gql`
+  // this query is exported to be used by AddChannel component
+  // and so refresh (not very smartly) data
+  export const channelsListQuery = gql`
     query ChannelsListQuery {
       channels {
         id
@@ -32,4 +34,9 @@ const ChannelsList = ({ data: {loading, error, channels }}) => {
     }
   `;
   
-export default graphql(channelsListQuery)(ChannelsList);
+// Add polling interva request to refresh data displayed  
+//export default graphql(channelsListQuery)(ChannelsList);
+
+export default graphql(channelsListQuery, {
+    options: { pollInterval: 5000 },
+  })(ChannelsList);
