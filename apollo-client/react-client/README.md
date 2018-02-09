@@ -16,6 +16,17 @@ npm install apollo-client apollo-cache-inmemory apollo-link-http react-apollo gr
 
 !!!!! Use of Apollo-client 2.0 is different than 1.0: https://github.com/apollographql/apollo-link/blob/master/packages/apollo-link-schema/README.md
 
+In tutorial, we can see: 
+```
+import { gql, graphql } from 'react-apollo';
+```
+
+Replace this by: 
+```
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+```
+
 ---------------------------------------------------------------------------------
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
