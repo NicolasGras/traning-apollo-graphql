@@ -8,13 +8,14 @@ import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
 
-import { graphql, ApolloProvider } from 'react-apollo';
-import gql from 'graphql-tag';
+import { ApolloProvider } from 'react-apollo';
+// Use of gql and graphql are exported in components files
+//import { graphql, ApolloProvider } from 'react-apollo';
+//import gql from 'graphql-tag';
 
 import { typeDefs } from './schema';
 
-import AddChannel from './components/AddChannel';
-//import AddChannelWithMutation from './components/AddChannel';
+import ChannelsListComponent from './components/ChannelList';   // export default from ChannelList.js
 
 const mocks = {
   Query: () => ({
@@ -52,36 +53,6 @@ const graphqlClient = new ApolloClient({
   link: new HttpLink({uri: 'http://localhost:4000/graphql'})
 });
 
-const ChannelsList = ({ data: {loading, error, channels }}) => {
-  if (loading) {
-    return <p>Loading ...</p>;
-  }
-  if (error) {
-    return <p>{error.message}</p>;
-  }
-
-  return (
-    <div className="channelsList">
-      <AddChannel />
-      { channels.map( ch => 
-        (<div key={ch.id} className="channel">{ch.name}</div>)
-      )}
-    </div>
-  );
-  
-};
-
-const channelsListQuery = gql`
-  query ChannelsListQuery {
-    channels {
-      id
-      name
-    }
-  }
-`;
-
-const ChannelsListWithData = graphql(channelsListQuery)(ChannelsList);
-
 class App extends Component {
   render() {
     return (
@@ -91,7 +62,7 @@ class App extends Component {
             <img src={logo} className="App-logo" alt="logo" />
             <h2>Welcome to Apollo</h2>
           </div>
-          <ChannelsListWithData />
+          <ChannelsListComponent />
         </div>
       </ApolloProvider>
     );

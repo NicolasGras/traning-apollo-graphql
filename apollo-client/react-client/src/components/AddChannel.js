@@ -1,7 +1,6 @@
 import React from 'react';
-import { gql, graphql } from 'react-apollo';
 
-const AddChannel = ({ mutate }) => {
+const AddChannel = () => {
     const handleKeyUp = (evt) => {
         if (evt.keyCode === 13) {
           console.log(evt.target.value);
