@@ -16,7 +16,7 @@ const ChannelsList = ({ data: {loading, error, channels }}) => {
       <div className="channelsList">
         <AddChannelComponent />
         { channels.map( ch => 
-          (<div key={ch.id} className="channel">{ch.name}</div>)
+          (<div key={ch.id} className={'channel ' + (ch.id < 0 ? 'optimistic' : '')}>{ch.name}</div>)
         )}
       </div>
     );
@@ -34,9 +34,9 @@ const ChannelsList = ({ data: {loading, error, channels }}) => {
     }
   `;
   
-// Add polling interva request to refresh data displayed  
-//export default graphql(channelsListQuery)(ChannelsList);
+// Add polling interval request to refresh data displayed  
+export default graphql(channelsListQuery)(ChannelsList);
 
-export default graphql(channelsListQuery, {
-    options: { pollInterval: 5000 },
-  })(ChannelsList);
+//export default graphql(channelsListQuery, {
+//  options: { pollInterval: 5000 },
+//})(ChannelsList);
