@@ -17,34 +17,34 @@ import { typeDefs } from './schema';
 
 import ChannelsListComponent from './components/ChannelList';   // export default from ChannelList.js
 
-const mocks = {
-  Query: () => ({
+// const mocks = {
+//   Query: () => ({
   
-    channels: (root, args) => {
-      return [
-        {
-          id: 1,
-          name: "Channel 1"
-        },
-        {
-          id: 2,
-          name: "Channel 2"
-        },
-        {
-          id: 3,
-          name: "Channel 3"
-        }
-      ];
-    }
-  }),
-};
+//     channels: (root, args) => {
+//       return [
+//         {
+//           id: 1,
+//           name: "Channel 1"
+//         },
+//         {
+//           id: 2,
+//           name: "Channel 2"
+//         },
+//         {
+//           id: 3,
+//           name: "Channel 3"
+//         }
+//       ];
+//     }
+//   }),
+// };
 
 const schema = makeExecutableSchema({ typeDefs });
 
-addMockFunctionsToSchema({
-  schema,
-  mocks
-});
+// addMockFunctionsToSchema({
+//   schema,
+//   mocks
+// });
 
 const apolloCache = new InMemoryCache(window.__APOLLO_STATE__);
 

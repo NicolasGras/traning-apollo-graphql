@@ -1,14 +1,18 @@
 const channels = [
     {
-        id: 1,
+        id: '1',
         name: 'soccer',
     }, 
     {
-        id: 2,
+        id: '2',
         name: 'baseball',
+        messages: [{
+          id: '21',
+          text: 'baseball is life',
+        }]
     }, 
     {
-        id: 3,
+        id: '3',
         name: 'handball',
     }
 ];
@@ -20,6 +24,15 @@ export const resolvers = {
         channels: () => {
             return channels;
         },
+        channel: (root, { id }) => {
+            
+            console.log("---------- root ------------------");
+            console.log(root);
+            console.log({ id });
+            console.log(channels);
+
+            return channels.find(channel => channel.id === id);
+        }
     },
     Mutation: {
         addChannel: (root, args) => {
