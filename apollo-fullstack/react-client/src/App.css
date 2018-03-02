@@ -197,6 +197,10 @@ div.messagesList input {
   transition: 300ms all ease-out;
 }
 
+div.messageInput {
+  text-align: left;
+}
+
 div.messageInput:before {
   content: "+";
   display: inline-block;

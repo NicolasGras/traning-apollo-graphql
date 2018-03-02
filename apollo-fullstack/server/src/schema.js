@@ -13,9 +13,13 @@ const typeDefs = `
     id: ID!
     text: String
   }
+
+  input MessageInput{
+    channelId: ID!
+    text: String
+  }
   
   # This type specifies the entry points into our API. In this case
-  # there is only one - "channels" - which returns a list of channels.
   type Query {
      channels: [Channel]    # "[]" means this is a list of channels
      channel(id: ID!): Channel
@@ -26,6 +30,9 @@ const typeDefs = `
 
     # A mutation to add a new channel to the list of channels
     addChannel(name: String!): Channel
+  
+    # A mutation to add a Message into a Channel
+    addMessage(message: MessageInput): Message
   }
 `;
 

@@ -3,6 +3,8 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
 import { channelsListQuery } from './ChannelList';
+import { withRouter } from 'react-router';
+
 
 const AddChannel = (props) => {
     const handleKeyUp = (evt) => {

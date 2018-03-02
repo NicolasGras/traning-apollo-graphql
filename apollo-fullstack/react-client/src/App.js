@@ -1,4 +1,12 @@
 import React, { Component } from 'react';
+
+import {
+  BrowserRouter,
+  Link,
+  Route,
+  Switch,
+} from 'react-router-dom';
+
 import logo from './logo.svg';
 import './App.css';
 
@@ -6,16 +14,20 @@ import ApolloClient from 'apollo-client';
 import { HttpLink } from "apollo-link-http";
 //import { SchemaLink } from "apollo-link-schema";
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
+import { toIdValue } from 'apollo-utilities';
+// import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
 
 import { ApolloProvider } from 'react-apollo';
 // Use of gql and graphql are exported in components files
 //import { graphql, ApolloProvider } from 'react-apollo';
 //import gql from 'graphql-tag';
 
-import { typeDefs } from './schema';
+//import { typeDefs } from './schema';
 
-import ChannelsListComponent from './components/ChannelList';   // export default from ChannelList.js
+import ChannelsListComponent from './components/ChannelList';       // export default from ChannelList.js
+import ChannelDetailsComponent from './components/ChannelDetails';  // export default from ChannelDetails.js
+import NotFound from './components/NotFound';
+
 
 // const mocks = {
 //   Query: () => ({
@@ -39,14 +51,24 @@ import ChannelsListComponent from './components/ChannelList';   // export defaul
 //   }),
 // };
 
-const schema = makeExecutableSchema({ typeDefs });
+//const schema = makeExecutableSchema({ typeDefs });
 
 // addMockFunctionsToSchema({
 //   schema,
 //   mocks
 // });
 
-const apolloCache = new InMemoryCache(window.__APOLLO_STATE__);
+//const apolloCache = new InMemoryCache(window.__APOLLO_STATE__);
+
+const apolloCache = new InMemoryCache({
+  cacheResolvers: {
+    Query: {
+      channel: (_, args) => {
+        return toIdValue(apolloCache.config.dataIdFromObject({ __typename: 'Channel', id: args['id'] }))
+      }
+    }
+  },
+});
 
 const graphqlClient = new ApolloClient({
   cache: apolloCache,
@@ -57,13 +79,17 @@ class App extends Component {
   render() {
     return (
       <ApolloProvider client={graphqlClient}>
-        <div className="App">
-          <div className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h2>Welcome to Apollo</h2>
+        <BrowserRouter>
+          <div className="App">
+            <Link to="/" className="navbar">React + GraphQL Tutorial</Link>
+            <Switch>
+              <Route exact path="/" component={ChannelsListComponent}/>
+              <Route path="/channel/:channelId" component={ChannelDetailsComponent}/>
+              <Route component={ NotFound }/>
+            </Switch>
           </div>
-          <ChannelsListComponent />
-        </div>
+        </BrowserRouter>
+
       </ApolloProvider>
     );
   }
