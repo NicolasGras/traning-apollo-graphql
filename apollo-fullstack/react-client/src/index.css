@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+div.optimistic {
+  /*color: rgba(255, 255, 255, 0.5);*/
+  color: red;
+}

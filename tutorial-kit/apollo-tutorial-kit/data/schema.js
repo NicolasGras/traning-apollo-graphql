@@ -7,7 +7,7 @@ type Query {
   testString: String
   author(firstName: String, lastName: String): Author
   allAuthors: [Author]
-  getFortuneCookie: String # we'll use this later
+  getFortuneCookie: String @cacheControl(maxAge: 5)
 }
 
 type Author {
