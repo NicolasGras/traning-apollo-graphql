@@ -34,6 +34,12 @@ const typeDefs = `
     # A mutation to add a Message into a Channel
     addMessage(message: MessageInput): Message
   }
+
+  type Subscription {
+    messageAdded: Message
+
+    messageAddedChannel(channelId: ID!): Message
+  }
 `;
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });

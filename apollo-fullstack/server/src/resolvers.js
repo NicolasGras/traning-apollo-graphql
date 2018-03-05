@@ -1,3 +1,5 @@
+import { PubSub, withFilter } from 'graphql-subscriptions';
+
 const channels = [
     {
         id: '1',
@@ -32,6 +34,8 @@ const channels = [
 ];
 
 let nextId = 8;
+
+const pubsub = new PubSub();
 
 export const resolvers = {
     Query: {
@@ -68,7 +72,7 @@ export const resolvers = {
 
             const newChannel = { id: String(nextId++), messages: [], name: args.name };
 
-            const newMessage = { id: String(nextId++), text: "Welcome to " + args.name};
+            const newMessage = { id: String(nextId++), text: "Welcome to " + args.name };
             newChannel.messages.push(newMessage);
 
             channels.push(newChannel);
@@ -84,16 +88,58 @@ export const resolvers = {
             console.log("----- end addMessage ------");
 
             const messageInput = args.message;
-            
-            const newMessage = { id: String(nextId++), text: messageInput.text};
+
+            const newMessage = { id: String(nextId++), text: messageInput.text };
 
             const channel = channels.find(channel => channel.id === messageInput.channelId);
 
-            if(channel) {
+            if (channel) {
                 channel.messages.push(newMessage);
             }
 
+            console.log("=== Server - addMessage === ");
+            console.log(pubsub);
+
+            pubsub.publish('messageAdded', { messageAdded: newMessage, channelId: messageInput.channelId });
+
+            pubsub.publish('myEvent', { messageAdded: newMessage, channelId: messageInput.channelId });
+            
+
             return newMessage;
+        }
+    },
+
+
+    Subscription: {
+        messageAdded: {
+            resolve: (payload) => {
+                return {
+                    customData: payload,
+                };
+            },
+            subscribe: () => pubsub.asyncIterator('messageAdded')
+        },
+
+        messageAddedChannel: {
+            resolve: (payload) => {
+                
+                console.log("############## 2 ###############");
+                console.log(payload);
+                
+                return {
+                    customData: payload,
+                };
+            },
+            subscribe: withFilter(() => pubsub.asyncIterator('myEvent'), (payload, variables) => {
+                // The `messageAdded` channel includes events for all channels, so we filter to only
+                // pass through events for the channel specified in the query
+                
+                console.log("############## 3 ###############");
+                console.log(payload);
+                console.log(variables);
+                
+                return payload.channelId === variables.channelId;
+        })
         }
     }
 };
