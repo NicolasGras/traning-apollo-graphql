@@ -36,9 +36,7 @@ const typeDefs = `
   }
 
   type Subscription {
-    messageAdded: Message
-
-    messageAddedChannel(channelId: ID!): Message
+    messageAdded(channelId: ID!): Message
   }
 `;
 
@@ -46,3 +44,5 @@ const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 export { schema };
   
+
+//#messageAddedChannel(channelId: ID!): Message
