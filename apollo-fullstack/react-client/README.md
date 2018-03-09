@@ -16,6 +16,8 @@ npm install apollo-client apollo-cache-inmemory apollo-link-http react-apollo gr
 
 !!!!! Use of Apollo-client 2.0 is different than 1.0: https://github.com/apollographql/apollo-link/blob/master/packages/apollo-link-schema/README.md
 
+T7: Client side - subscription (https://github.com/apollographql/apollo-client/blob/master/docs/source/features/subscriptions.md)
+
 In tutorial, we can see: 
 ```
 import { gql, graphql } from 'react-apollo';
