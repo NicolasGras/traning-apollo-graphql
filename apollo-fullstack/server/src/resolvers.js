@@ -97,6 +97,9 @@ export const resolvers = {
                 channel.messages.push(newMessage);
             }
 
+            console.log(" - newMessage");
+            console.log(newMessage);
+
             pubsub.publish('messageAdded', { messageAdded: newMessage, channelId: messageInput.channelId });
 
             return newMessage;
@@ -111,9 +114,11 @@ export const resolvers = {
                 console.log("############## 2 ###############");
                 console.log(payload);
                 
-                return {
+                const data = {
                     customData: payload,
                 };
+
+                return data;
             },
             // subscribe: () => pubsub.asyncIterator('messageAdded')
             subscribe: withFilter(() => pubsub.asyncIterator('messageAdded'), (payload, variables) => {

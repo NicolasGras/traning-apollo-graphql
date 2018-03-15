@@ -79,10 +79,6 @@ const httpLink = new HttpLink({
   uri: 'http://localhost:4000/graphql'
 });
 
-const graphqlClient = new ApolloClient({
-  cache: apolloCache,
-  link: httpLink
-});
 
 const wsLink = new WebSocketLink({
   uri: `ws://localhost:4000/subscriptions`,
@@ -102,6 +98,12 @@ const link = split(
   wsLink,
   httpLink,
 );
+
+
+const graphqlClient = new ApolloClient({
+  cache: apolloCache,
+  link: link
+});
 
 class App extends Component {
   render() {
