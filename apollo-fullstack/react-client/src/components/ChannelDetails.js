@@ -7,7 +7,7 @@ import NotFoundComponent from './NotFound';
 
 class ChannelDetails extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
   
     console.log("===================== ChannelDetails.componentWillMount =====================");
 
@@ -16,7 +16,7 @@ class ChannelDetails extends Component {
     this.props.data.subscribeToMore({
       document: messagesSubscription,
       variables: {
-        channelId: this.props.match.params.channelId,
+        channelId: this.props.match.params.channelId
       },
       updateQuery: (prev, {subscriptionData}) => {
         

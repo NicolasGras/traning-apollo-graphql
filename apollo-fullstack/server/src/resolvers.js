@@ -71,8 +71,9 @@ export const resolvers = {
             console.log("---------------------------------------");
 
             const newChannel = { id: String(nextId++), messages: [], name: args.name };
-
             const newMessage = { id: String(nextId++), text: "Welcome to " + args.name };
+
+
             newChannel.messages.push(newMessage);
 
             channels.push(newChannel);
@@ -90,6 +91,7 @@ export const resolvers = {
             const messageInput = args.message;
 
             const newMessage = { id: String(nextId++), text: messageInput.text };
+            // const newMessage = { id: nextId++, text: messageInput.text };
 
             const channel = channels.find(channel => channel.id === messageInput.channelId);
 
@@ -114,11 +116,7 @@ export const resolvers = {
                 console.log("############## 2 ###############");
                 console.log(payload);
                 
-                const data = {
-                    customData: payload,
-                };
-
-                return data;
+                return payload.messageAdded;
             },
             // subscribe: () => pubsub.asyncIterator('messageAdded')
             subscribe: withFilter(() => pubsub.asyncIterator('messageAdded'), (payload, variables) => {

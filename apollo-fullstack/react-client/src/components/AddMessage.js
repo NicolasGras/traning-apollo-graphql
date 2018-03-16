@@ -51,6 +51,15 @@ const AddMessage = (props) => {
                         }
                     });
 
+                    console.log("################### AddMessage Update #######################################");
+                    console.log(" - store");
+                    console.log(store);
+                    console.log(" - data");
+                    console.log(data);
+                    console.log(" - addMessage");
+                    console.log(addMessage);
+                    console.log("##########################################################");
+
                     // Add our Message from the mutation to the end.
                     //data.channel.messages.push(addMessage);
                     if (!data.channel.messages.find((msg) => msg.id === addMessage.id))
